@@ -21,14 +21,26 @@ function carregarImagens(urlDaImagem){
     urlDaImagem.forEach(url => {
         const quadro = document.createElement('div')
         const imagem = document.createElement('img')
+        const ligacao = document.createElement('a')
 
-        imagem.src =url
+        imagem.src = url
+        ligacao.href = url
+        ligacao.target = '_blank'
         
         quadro.classList.add('quadro')
-        quadro.appendChild(imagem)
+        quadro.appendChild(ligacao)
+        ligacao.appendChild(imagem)
 
         container.appendChild(quadro)
     })
+}
+
+let carregamento = async() => {
+    let pesquisa = campo.value
+
+    let link = await buscarImagens(pesquisa)
+
+    carregarImagens(link)
 }
 
 function buscar (){
@@ -38,12 +50,13 @@ function buscar (){
     barra.appendChild(botaoBuscar)
     botaoBuscar.textContent = 'buscar'
 
-    botaoBuscar.addEventListener('click', async() => {
-        let pesquisa = campo.value
+    botaoBuscar.addEventListener('click', carregamento)
 
-        let link = await buscarImagens(pesquisa)
-
-        carregarImagens(link)
+    campo.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            carregamento()
+        }
     })
 }
 

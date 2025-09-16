@@ -15,8 +15,10 @@ body{
 }
 
 .barra{
-    width: 30%;
+    display: flex;
+    width: 40%;
     height: 4%;
+    gap: 5px;
 }
 
 .barra input{
@@ -52,8 +54,7 @@ body{
     align-items: center;
 }
 
-.quadro img {
+ img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border-radius: 10px;
 }
